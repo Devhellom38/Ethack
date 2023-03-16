@@ -48,7 +48,7 @@ def PasswordBrute(user,length):
 
     chars = strings.printable
     Server = "pop.gmail.com"
-    user = input("which email?")
+   
     
     Digits = length
 
