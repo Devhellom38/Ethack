@@ -1,6 +1,6 @@
-"""Real Python feed reader.
+"""Real Python Ethitack.
 
-Import the `feed` module to work with the Real Python feed:
+Import the `webattack` module to work with the Real Python feed:
 
     >>> from Ethack import webattack
     >>> webattack.list()
